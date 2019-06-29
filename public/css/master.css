@@ -1,0 +1,29 @@
+@font-face {
+    font-family: karla;
+    src: url(/fonts/Karla.ttf);
+  }
+a{
+    text-decoration:none;
+    transition: 0.5s;
+    font-family: karla;
+}
+.navbar{
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+a:hover{
+    color: black;
+}
+.brand{
+    font-size: 40px;
+}
+.li{
+    font-size: 23px;
+
+}
+.content{
+    padding: 16px;
+  margin-top: 5%;
+}
