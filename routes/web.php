@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 Route::post('/login','LoginLogoutController@login');
 Route::get('/logout','LoginLogoutController@logout');
+Route::get('/checkShoppingCart','ShoppingCartController@index');
