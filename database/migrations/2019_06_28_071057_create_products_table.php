@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->increments('id_product');
             $table->string('name');
             $table->decimal('price',10,2);
-            $table->string('picture');
             $table->integer('quantity');
         });
     }   
