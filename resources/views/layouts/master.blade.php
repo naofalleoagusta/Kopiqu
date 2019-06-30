@@ -15,10 +15,17 @@
   <body>
     <div class="navbar w3-bar w3-green">
         <a href="/home" class="brand w3-bar-item w3-padding-16">Kopiqu</a>
-        <a class ="li w3-bar-item w3-padding-32 " href="#">Category</a>
-        <a class ="li w3-bar-item w3-padding-32 w3-right " href="#"><i class="fas fa-shopping-cart"></i></a>
-        <a class ="li w3-bar-item w3-padding-32 w3-right" href="#">Login/Register</a>
+        
+        <a class ="li w3-bar-item w3-padding-32 w3-right " href="#"><i class="fas fa-shopping-cart"></i>Cart</a>
+        
+          @if (isset($name)&isset($id))
+          <a class ="li w3-bar-item w3-padding-32 w3-right" href="/logout">Logout</a>
+          <a class ="li w3-bar-item w3-padding-32 w3-right" style=" cursor: pointer;" onclick="">Welcome, {{$name}}!</a>
+          @else
+          <a class ="li w3-bar-item w3-padding-32 w3-right" style=" cursor: pointer;" onclick="document.getElementById('id01').style.display='block'">Login/Register</a>
+          @endif
       </div>
   </body>
   @yield('content')
+  
   </html>

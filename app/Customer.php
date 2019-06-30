@@ -4,11 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Customer extends Model
 {
     //created_at & updated_at not exist
     public $timestamps = false;
-
-    protected $fillable = ['name','price','quantity'];
-    
 }

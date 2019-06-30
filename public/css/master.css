@@ -5,6 +5,9 @@
   body{
       font-family: karla;
   }
+  h2{
+      font-family: karla;
+  }
 a{
     text-decoration:none;
     transition: 0.5s;
