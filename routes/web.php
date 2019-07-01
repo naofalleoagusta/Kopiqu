@@ -19,3 +19,4 @@ Route::post('/login','LoginLogoutController@login');
 Route::get('/logout','LoginLogoutController@logout');
 Route::post('/addToCart','ShoppingCartController@addToCart');
 Route::get('/checkOut','CheckOutController@check');
+Route::post('/payment','PaymentController@processPayment');

@@ -12,6 +12,7 @@ class CheckOutController extends Controller
         $orders->id_customer=$request->session()->get('id');
         $orders->amount_to_be_paid=$total;
         $orders->paid=0;
+        $orders->finished=0;
         $orders->address="belom isi";
         $orders->save();
     }
@@ -19,10 +20,7 @@ class CheckOutController extends Controller
     public function updateAmount(Request $request){
         Order::where('id_customer',$request->session()->get('id'))->where('paid',0)->update(['amount_to_be_paid' => (int)$request->total+$request->session()->get('unique_code')]);
     }
-
-    public function updateAmount(Request $reu){
-
-    }
+    
     public function check(Request $request){
         if($request->session()->has('name')){
             //  dd($arr);
