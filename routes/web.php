@@ -14,4 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', 'KopiquController@index');
+Route::get('/home', 'HomeController@index');
+Route::post('/home', 'HomeController@searchByCategory');
+Route::post('/login','LoginLogoutController@login');
+Route::get('/logout','LoginLogoutController@logout');
+Route::post('/addToCart','ShoppingCartController@addToCart');
+Route::get('/checkOut','CheckOutController@check');
+Route::post('/payment','PaymentController@processPayment');
+Route::post('/updateItem','AdminController@update');
+Route::post('/deleteItem','AdminController@delete');
+Route::get('/processOrder','AdminController@showOrders');
+Route::post('/processOrder','AdminController@finishOrder');

@@ -2,6 +2,15 @@
     font-family: karla;
     src: url(/fonts/Karla.ttf);
   }
+  body{
+      font-family: karla;
+  }
+  h2{
+      font-family: karla;
+  }
+  h1{
+      font-family:karla;
+  }
 a{
     text-decoration:none;
     transition: 0.5s;
@@ -24,6 +33,31 @@ a:hover{
 
 }
 .content{
-    padding: 16px;
-  margin-top: 5%;
+    margin: auto;
+    padding-top: 10%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+img{
+    height: 250px;
+    width: 250px;
+}
+.conta{
+    display: block;
+    height: 100px;
+}
+.element{
+    display: block;
+    margin:0;
+}
+.form{
+    width: 100%;
+}
+.sbm{
+    width:90px;
+    transition: 0.5s;
+}
+.sbm:hover{
+    border-color: white;
 }
