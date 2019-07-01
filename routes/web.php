@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', 'HomeController@index');
+Route::post('/home', 'HomeController@searchByCategory');
 Route::post('/login','LoginLogoutController@login');
 Route::get('/logout','LoginLogoutController@logout');
 Route::post('/addToCart','ShoppingCartController@addToCart');

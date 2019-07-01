@@ -28,7 +28,7 @@ class AdminController extends Controller
     }
 
     public function showOrders(Request $request){
-        $orders = Order::where('finished','=','0')->get();
+        $orders = Order::all();
         return view('processOrder',['orders'=>$orders,'admin'=>$request->session()->get('admin'),'role'=>$request->session()->get('role')]);
     }
 

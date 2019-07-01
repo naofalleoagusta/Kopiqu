@@ -13,7 +13,8 @@ class ShoppingCartController extends Controller
         foreach ($product as $prod) {
             $arrOfCart=Arr::add([],'id_product',$prod->id_product);
             $arrOfCart=Arr::add($arrOfCart,'quantity',$request->quantity);
-            $arrOfCart=Arr::add($arrOfCart,'total',$prod->price*$request->quantity);
+            $arrOfCart=Arr::add($arrOfCart,'weight',$prod->weight*$request->quantity);
+            $arrOfCart=Arr::add($arrOfCart,'total',$prod->price*$request->quantity+($prod->weight*$request->quantity*5000));
             $finalItem=Arr::add([],$prod->name,$arrOfCart);
             if($request->session()->has('shoppingCart')){
                 $arr=$request->session()->get('shoppingCart');

@@ -3,6 +3,18 @@
 Welcome to Kopiqu
 @endsection
 @section('content')
+<div class="w3-right w3-container w3-green" style="margin-top:10rem;padding-left:-1rem;margin-right:1rem;width:9rem;">
+    <p style="font-size:20px">Search by categories</p>
+    <form action="/home" method="post">
+        <select name="cat">
+            @foreach ($categories as $category)
+                <option value="{{$category->id_category}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+        @csrf
+        <input type="submit">
+    </form><br>
+</div>
     <div class="content">
         @foreach ($products as $product)
         @if ($product->quantity>0)

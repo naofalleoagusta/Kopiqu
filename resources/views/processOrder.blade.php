@@ -11,19 +11,34 @@ Process Order
                   <th>Id Customer</th>
                   <th>Amount</th>
                   <th>Address</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
             @foreach ($orders as $order)
                 <tr>
                     <td>{{$order->id_order}}</td>
                     <td>{{$order->id_customer}}</td>
-                    <td>{{$order->amount_to_be_paid}}</td>
+                    <td>Rp {{$order->amount_to_be_paid}}</td>
                     <td>{{$order->address}}</td>
+                    @if($order->finished==0)
+                        <td>Haven't shipped</td>
+                        <td><form action="/processOrder" method="post">
+                            @csrf
+                            <input type="hidden" name="id_order" value="{{$order->id_order}}">
+                            <input class="w3-button sbm w3-round-large w3-green w3-hover-black"type="submit" value="Ship It!">    
+                        </form></td>
+                    
+                    @else
+                    
+                    <td> Shipped!</td>
                     <td><form action="/processOrder" method="post">
                         @csrf
                         <input type="hidden" name="id_order" value="{{$order->id_order}}">
-                        <input class="w3-button sbm w3-round-large w3-green w3-hover-black"type="submit" value="Finished">    
+                        <input disabled class="w3-button sbm w3-round-large w3-green w3-hover-black"type="submit" value="Ship It!">    
                     </form></td>
+                    @endif
+
+                    
                 </tr>
             @endforeach
               </table>
