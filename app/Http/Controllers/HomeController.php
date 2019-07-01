@@ -11,10 +11,22 @@ class HomeController extends Controller
         $products = Product::all();
         $value = $request->session()->get('id');
         if($request->session()->has('name')){
-            return view('home',['products'=>$products,'name'=>$request->session()->get('name'),'id'=>$request->session()->get('id')]);
+            //  dd($arr);
+            //$request->session()->flush();
+            if(!$request->session()->has('shoppingCart')){
+                return view('home',['products'=>$products,'name'=>$request->session()->get('name'),'id'=>$request->session()->get('id')]);
+            }
+            else{
+                $cart=$request->session()->get('shoppingCart');
+                return view('home',['products'=>$products,'name'=>$request->session()->get('name'),'id'=>$request->session()->get('id'),'cart'=>$cart]);
+            }
         }
         else{
             return view('home',['products'=>$products]);
         }
+    }
+
+    private function isShoppingCartExist(Request $request){
+
     }
 }

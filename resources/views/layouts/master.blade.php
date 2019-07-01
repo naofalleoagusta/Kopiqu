@@ -16,7 +16,7 @@
     <div class="navbar w3-bar w3-green">
         <a href="/home" class="brand w3-bar-item w3-padding-16">Kopiqu</a>
         
-        <a class ="li w3-bar-item w3-padding-32 w3-right " href="#"><i class="fas fa-shopping-cart"></i>Cart</a>
+        <a class ="li w3-bar-item w3-padding-32 w3-right " onclick="document.getElementById('id02').style.display='block'" href="#"><i class="fas fa-shopping-cart"></i>Cart</a>
         
           @if (isset($name)&isset($id))
           <a class ="li w3-bar-item w3-padding-32 w3-right" href="/logout">Logout</a>

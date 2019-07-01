@@ -31,7 +31,7 @@ class LoginLogoutController extends Controller
             $request->session()->put('error','<script>alert("Wrong Email or Password!")</script>');
         }
         //redirect to homepage controller method index
-        return redirect('checkShoppingCart');
+        return redirect()->action('HomeController@index');
     }
     /*
     This function handle logout action from user

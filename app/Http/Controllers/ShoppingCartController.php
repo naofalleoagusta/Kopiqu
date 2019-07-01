@@ -3,22 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Customer;
-use App\Shopping_Cart;
+use App\Product;
+use Illuminate\Support\Arr;
+
 class ShoppingCartController extends Controller
 {
-    public function index(Request $request){
-        $check=Customer::join('shopping_cart', 'customers.id_customer', '=', 'shopping_cart.id_customer')->count();
-        if($check==0){
-            self::createCart($request);
-        }
-        return redirect()->action('HomeController@index');
-    }
+    public function addToCart(Request $request){
+        $product=Product::where('id_product',$request->id_product)->get();
+        foreach ($product as $prod) {
+            //Store customer's name to session with key=>name
+            //$prod->id_product,$prod->price,$request->quantity
+            $arrOfCart=Arr::add([],'id_product',$prod->id_product);
+            $arrOfCart=Arr::add($arrOfCart,'quantity',$request->quantity);
+            $arrOfCart=Arr::add($arrOfCart,'total',$prod->price*$request->quantity);
+            $finalItem=Arr::add([],$prod->name,$arrOfCart);
+            if($request->session()->has('shoppingCart')){
+                $arr=$request->session()->get('shoppingCart');
+                $arr+=$finalItem;
+                // $array=Arr::prepend([],$request->session()->get('shoppingCart'));
+                // if(count($array)==1){
+                //     $array+=$arrOfCart;
+                //     //dd($array);
+                // }
+                // else{
+                //     $arr=$array;
+                //     $temp=Arr::prepend($arr,$arrOfCart);
+                //     dd($temp);
+                // }
+                //dd(count($array));
+                //$arrOfCart=Arr::prepend($array,$arrOfCart);
+                $request->session()->put('shoppingCart',$arr);
+            }
+            else{
+                $request->session()->put('shoppingCart',$finalItem);
+            }
 
-    private function createCart(Request $request){
-        $shopping_cart = new Shopping_Cart;
-        $shopping_cart->id_customer=$request->session()->get('id');
-        $shopping_cart->total_price=0;
-        $shopping_cart->save();
+           return redirect()->action('HomeController@index');
+            //$request->session()->put('name',$cust->name);
+            //Store customer's id to session with key=>id
+            //$request->session()->put('id',$cust->id_customer);
+        }
     }
 }
