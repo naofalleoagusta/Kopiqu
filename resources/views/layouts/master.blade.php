@@ -28,4 +28,54 @@
   </body>
   @yield('content')
   
+  @if (isset($cart))
+    <div id="id02" class="w3-modal" >
+            <div class="w3-modal-content w3-animate-top w3-card-4"style="width:40%;">
+              <header class="w3-container w3-green"> 
+                <span onclick="document.getElementById('id02').style.display='none'" 
+                class="w3-button w3-display-topright">&times;</span>
+                <h2>Shopping Cart</h2>
+              </header>
+              <div class="w3-container w3-left w3-white" style="width:100%">
+                  @php
+                    $total=0;
+                  @endphp   
+                  <div class="w3-container" style="height:300px;overflow: auto;">
+                    @foreach ($cart as $key=>$value)
+                        <h2>{{$key}}</h2>
+                        @foreach ($value as $keys=>$values)
+                            @if (strcmp($keys,'id_product')!=0)
+                                @if ($keys=='total')
+                                    @php
+                                        $total+=$item[$keys]=$values
+                                    @endphp
+                                    
+                                    {{$keys}} : Rp {{$item[$keys]=$values}}
+                                @else
+                                    {{$keys}} : {{$item[$keys]=$values}}
+                                @endif
+                                    <br>
+                            @endif
+                        @endforeach 
+                        
+                        <hr style="border:1px solid black">
+                @endforeach
+            </div>
+                <br>
+                <h2>Total to be paid : Rp {{$total}}</h2>
+                <form action="/checkOut" method="get">
+                <input type="hidden" name="total" value="{{$total}}">
+                    {{csrf_field()}}
+                    <input type="submit" class="w3-button sbm w3-round-large w3-green w3-hover-black" value="Checkout!">
+                </form>
+                <br>
+                <br>
+              </div>
+              <footer class="w3-container w3-green">
+                <p>&copy; Kopiqu 2019</p>
+              </footer>
+            </div>
+    
+          </div>
+    @endif
   </html>

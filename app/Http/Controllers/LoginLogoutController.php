@@ -37,8 +37,10 @@ class LoginLogoutController extends Controller
     This function handle logout action from user
     */
     public function logout(Request $request){
-        //delete all the session
-        $request->session()->flush();
+        //delete user session
+        $request->session()->forget('name');
+        $request->session()->forget('id');
+        $request->session()->forget('shoppingCart');
         //redirect to homepage controller method index
         return redirect()->action('HomeController@index');
     }
