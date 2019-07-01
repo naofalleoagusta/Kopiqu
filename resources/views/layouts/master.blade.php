@@ -16,12 +16,22 @@
     <div class="navbar w3-bar w3-green">
         <a href="/home" class="brand w3-bar-item w3-padding-16">Kopiqu</a>
         
-        <a class ="li w3-bar-item w3-padding-32 w3-right " onclick="document.getElementById('id02').style.display='block'" href="#"><i class="fas fa-shopping-cart"></i>Cart</a>
+        
         
           @if (isset($name)&isset($id))
+          <a class ="li w3-bar-item w3-padding-32 w3-right " onclick="document.getElementById('id02').style.display='block'" href="#"><i class="fas fa-shopping-cart"></i>Cart</a>
           <a class ="li w3-bar-item w3-padding-32 w3-right" href="/logout">Logout</a>
           <a class ="li w3-bar-item w3-padding-32 w3-right" style=" cursor: pointer;" onclick="">Welcome, {{$name}}!</a>
+          @elseif(isset($admin)&isset($role))
+          
+          <a class ="li w3-bar-item w3-padding-32 w3-right" href="/logout">Logout</a>
+          @if ($role=="operation"||$role=="processor")
+          <a class ="li w3-bar-item w3-padding-32 w3-right" href="/processOrder" style=" cursor: pointer;" onclick="">Process Order</a>
+          @endif
+          <a class ="li w3-bar-item w3-padding-32 w3-right" style=" cursor: pointer;" onclick="">Welcome, {{$admin}}!</a>
+          
           @else
+          <a class ="li w3-bar-item w3-padding-32 w3-right " onclick="document.getElementById('id02').style.display='block'" href="#"><i class="fas fa-shopping-cart"></i>Cart</a>
           <a class ="li w3-bar-item w3-padding-32 w3-right" style=" cursor: pointer;" onclick="document.getElementById('id01').style.display='block'">Login/Register</a>
           @endif
       </div>
@@ -77,7 +87,6 @@
             </div>
     
           </div>
-          
     @else
     <div id="id02" class="w3-modal" >
             <div class="w3-modal-content w3-animate-top w3-card-4"style="width:40%;">

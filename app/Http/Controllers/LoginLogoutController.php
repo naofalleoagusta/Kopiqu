@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Admin;
 class LoginLogoutController extends Controller
 {
     /*
@@ -28,7 +29,17 @@ class LoginLogoutController extends Controller
         }
         else{
             //Store the error message to session
-            $request->session()->put('error','<script>alert("Wrong Email or Password!")</script>');
+            $admins=Admin::where('username',$email)->where('password',$password)->count();
+            if($admins==1){
+                $admin = Admin::where('username',$email)->where('password',$password)->get();
+                foreach ($admin as $adm) {
+                    //Store customer's name to session with key=>name
+                    $request->session()->put('admin',$adm->name);
+                    //Store customer's id to session with key=>id
+                    $request->session()->put('role',$adm->role);
+                }
+            
+            }
         }
         //redirect to homepage controller method index
         return redirect()->action('HomeController@index');
@@ -41,6 +52,8 @@ class LoginLogoutController extends Controller
         $request->session()->forget('name');
         $request->session()->forget('id');
         $request->session()->forget('shoppingCart');
+        $request->session()->forget('admin');
+        $request->session()->forget('role');
         //redirect to homepage controller method index
         return redirect()->action('HomeController@index');
     }

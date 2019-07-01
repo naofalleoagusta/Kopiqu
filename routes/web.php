@@ -20,3 +20,7 @@ Route::get('/logout','LoginLogoutController@logout');
 Route::post('/addToCart','ShoppingCartController@addToCart');
 Route::get('/checkOut','CheckOutController@check');
 Route::post('/payment','PaymentController@processPayment');
+Route::post('/updateItem','AdminController@update');
+Route::post('/deleteItem','AdminController@delete');
+Route::get('/processOrder','AdminController@showOrders');
+Route::post('/processOrder','AdminController@finishOrder');

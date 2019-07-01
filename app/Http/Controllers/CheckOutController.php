@@ -38,9 +38,8 @@ class CheckOutController extends Controller
                         $total=(int)$request->total-$request->session()->get('unique_code');
                         $orders=Order::where('amount_to_be_paid',$temp)->count();
                         if($orders>=1){
-                            $request->session()->put('unique_code',$request->session()->get('unique_code')-1);
+                            $request->session()->put('unique_code',$request->session()->get('unique_code')+1);
                             $total=(int)$request->total-$request->session()->get('unique_code');
-                            dd($total);
                             Self::createOrder($request,$total);
                         }
                         else{
@@ -50,7 +49,7 @@ class CheckOutController extends Controller
                     }
                     else{
                         if($request->session()->get('unique_code')<=500){
-                            $request->session()->put('unique_code',$request->session()->get('unique_code')-1);
+                            $request->session()->put('unique_code',$request->session()->get('unique_code')+1);
                         }
                         else{
                             $request->session()->put('unique_code',1);
@@ -58,9 +57,8 @@ class CheckOutController extends Controller
                         $temp=$request->total-$request->session()->get('unique_code');
                         $orders=Order::where('amount_to_be_paid',$temp)->count();
                         if($orders>=1){
-                            $request->session()->put('unique_code',$request->session()->get('unique_code')-1);
+                            $request->session()->put('unique_code',$request->session()->get('unique_code')+1);
                             $total=(int)$request->total-$request->session()->get('unique_code');
-                            dd($total);
                             Self::createOrder($request,$total);
                         }
                         else{

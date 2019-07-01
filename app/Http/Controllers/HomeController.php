@@ -22,7 +22,15 @@ class HomeController extends Controller
             }
         }
         else{
-            return view('home',['products'=>$products]);
+            if($request->session()->has('admin')){
+                if($request->session()->get('role')!="processor"){
+                    return view('home',['products'=>$products,'admin'=>$request->session()->get('admin'),'role'=>$request->session()->get('role')]);
+                }
+                else{
+                    return redirect()->action('AdminController@showOrders');;
+                }
+            }
+            else{return view('home',['products'=>$products]);}
         }
     }
 

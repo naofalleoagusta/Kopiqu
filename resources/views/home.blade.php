@@ -6,34 +6,92 @@ Welcome to Kopiqu
     <div class="content">
         @foreach ($products as $product)
         @if ($product->quantity>0)
-        <div class="w3-card-4 w3-margin ">
+        <div class="w3-card-4 w3-margin " style="width:20%">
             <img src="/images/kopi.png" alt="">
-            <div class="w3-container w3-green conta">
-                <p class="w3-left element" style="font-size:20px;">{{$product->name}}</p>
-                <br>
-                <p class="w3-right element" style="">Rp {{$product->price}}</p>
-                <br>
-                <form class="w3-container w3-right form" action="/addToCart" method="post">
-                    <input  class="w3-left w3-green"type="number" value=1 name="quantity" min=1 max={{$product->quantity}} id="">
-                    <input type="hidden" name="id_product" value="{{$product->id_product}}">
-                        {{csrf_field()}}
-                    <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black"  value="Order!">
-                </form>
+            <div class="w3-container w3-green conta" style="height:40%">
+                @if (!isset($role)&!isset($admin))
+                    <p class="w3-left element" style="font-size:20px;">{{$product->name}}</p>
+                    <br>
+                    <div class="w3-left" style="overflow:auto;height:40%">
+                        <p class="w3-left element" style="color:black;font-size:10px;">{{$product->description}}</p>
+                    </div>
+                    <br>
+                    <p class="w3-right element" style="">Rp {{$product->price}}</p>
+                    <br>
+                    <form class="w3-container w3-right form" action="/addToCart" method="post">
+                        <input  class="w3-left w3-green"type="number" value=1 name="quantity" min=1 max={{$product->quantity}} id="">
+                        <input type="hidden" name="id_product" value="{{$product->id_product}}">
+                            {{csrf_field()}}
+                        <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black"  value="Order!">
+                    </form>
+                @else
+                    @if ($role=="operation"||$role=="inventory")
+                    <form class="w3-container w3-right form" action="/updateItem" method="post">
+                        <input type="text" name="product_name" value="{{$product->name}}">
+                        <br>
+                        <input type="text" name="description" value="{{$product->description}}">
+                        <br>
+                        <input type="number" name="price" value="{{$product->price}}">
+                        <br>
+                        <input type="hidden" name="id_product" value="{{$product->id_product}}">
+                            {{csrf_field()}}
+                        <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black"  value="Update!">
+                    </form>
+                    <form action="/deleteItem" method="post">
+                        @csrf
+                        
+                        <input type="hidden" name="id_product" value="{{$product->id_product}}">
+                        <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black"  value="Delete!">
+                    </form>
+                    @endif
+                
+                @endif
             </div>
         </div>
         @else
-        <div class="w3-card-4 w3-margin ">
-            <img src="/images/kopi.png" alt="">
-            <div class="w3-container w3-green conta">
-                <p class="w3-left element" style="font-size:20px;">{{$product->name}}</p>
-                <br>
-                <p class="w3-right element" style="">Rp {{$product->price}}</p>
-                <br>
-                <form class="w3-container w3-right form" action="">
-                    <input type="submit" class="w3-button w3-round-large w3-white w3-hover-black" disabled value="Out of Stock!">
-                </form>
+        <div class="w3-card-4 w3-margin " style="width:20%">
+                <img src="/images/kopi.png" alt="">
+                <div class="w3-container w3-green conta" style="height:40%">
+                    
+                @if (!isset($role)&!isset($admin))
+                    <p class="w3-left element" style="font-size:20px;">{{$product->name}}</p>
+                    <br>
+                    <div class="w3-left" style="overflow:auto;height:40%">
+                        <p class="w3-left element" style="color:black;font-size:10px;">{{$product->description}}</p>
+                    </div>
+                    <br>
+                    <p class="w3-right element" style="">Rp {{$product->price}}</p>
+                    <br>
+                    <form class="w3-container w3-right form" action="/addToCart" method="post">
+                        <input  class="w3-left w3-green"type="number" value=1 name="quantity" min=1 max={{$product->quantity}} id="">
+                        <input type="hidden" name="id_product" value="{{$product->id_product}}">
+                            {{csrf_field()}}
+                        <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black" disabled value="Out of Stock!">
+                    </form>
+                    @else
+                    @if ($role=="operation"||$role=="inventory")
+                    <form class="w3-container w3-right form" action="/updateItem" method="post">
+                        <input type="text" name="product_name" value="{{$product->name}}">
+                        <br>
+                        <input type="text" name="description" value="{{$product->description}}">
+                        <br>
+                        <input type="number" name="price" value="{{$product->price}}">
+                        <br>
+                        <input type="hidden" name="id_product" value="{{$product->id_product}}">
+                            {{csrf_field()}}
+                        <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black"  value="Update!">
+                    </form>
+                    <form action="/deleteItem" method="post">
+                        @csrf
+                        
+                        <input type="hidden" name="id_product" value="{{$product->id_product}}">
+                        <input type="submit" class="w3-button sbm w3-round-large w3-white w3-hover-black"  value="Delete!">
+                    </form>
+                    
+                    @endif  
+                @endif
+                </div>
             </div>
-        </div>
         @endif
         @endforeach
     </div>
@@ -49,7 +107,7 @@ Welcome to Kopiqu
                 <form action="/login" method="post">
                     <label for="">Email</label>
                     <br>
-                  <input type="email" name="email" id=""><br>
+                  <input type="text" name="email" id=""><br>
                   <label for="">Password</label>
                   {{csrf_field()}}
                   <br>
@@ -63,6 +121,7 @@ Welcome to Kopiqu
                 <p>&copy; Kopiqu 2019</p>
               </footer>
             </div>
+        </div>
     @endif
     
 @endsection
