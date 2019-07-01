@@ -77,5 +77,26 @@
             </div>
     
           </div>
+          
+    @else
+    <div id="id02" class="w3-modal" >
+            <div class="w3-modal-content w3-animate-top w3-card-4"style="width:40%;">
+              <header class="w3-container w3-green"> 
+                <span onclick="document.getElementById('id02').style.display='none'" 
+                class="w3-button w3-display-topright">&times;</span>
+                <h2>Shopping Cart</h2>
+              </header>
+              <div class="w3-container w3-left w3-white" style="width:100%">
+                  <h2>Your Shopping Cart is Empty!</h2>
+                  
+            </div>
+              <footer class="w3-container w3-green">
+                <p>&copy; Kopiqu 2019</p>
+              </footer>
+    
+        
+        </div>
+    </div>
+          
     @endif
   </html>

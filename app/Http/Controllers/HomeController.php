@@ -26,7 +26,4 @@ class HomeController extends Controller
         }
     }
 
-    private function isShoppingCartExist(Request $request){
-
-    }
 }
