@@ -48,6 +48,14 @@ class ProductSeeder extends Seeder
             'description'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore',
             'weight'=>1
         ]);
+
+        Product::insert([
+            'name'=>'Black Coffee',
+            'price'=>20000,
+            'quantity'=>50,
+            'description'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore',
+            'weight'=>1
+        ]);
         Product::insert([
             'name'=>'Frappuccino',
             'price'=>40000,

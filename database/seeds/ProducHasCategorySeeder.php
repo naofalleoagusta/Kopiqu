@@ -95,5 +95,9 @@ class ProducHasCategorySeeder extends Seeder
             'id_product'=>1,
             'id_category'=>8
         ]);
+        CategoryProduct::insert([
+            'id_product'=>6,
+            'id_category'=>11
+        ]);
     }
 }
