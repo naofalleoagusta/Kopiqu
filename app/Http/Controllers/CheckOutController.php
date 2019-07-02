@@ -36,7 +36,7 @@ class CheckOutController extends Controller
                     if(!$request->session()->has('unique_code')){
                         $request->session()->put('unique_code',1);
                         $total=(int)$request->total-$request->session()->get('unique_code');
-                        $orders=Order::where('amount_to_be_paid',$temp)->count();
+                        $orders=Order::where('amount_to_be_paid',$total)->count();
                         if($orders>=1){
                             $request->session()->put('unique_code',$request->session()->get('unique_code')+1);
                             $total=(int)$request->total-$request->session()->get('unique_code');
