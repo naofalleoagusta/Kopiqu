@@ -15,13 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id_order');
-            $table->integer('unique_code');
             $table->decimal('amount_to_be_paid',10,2);
             $table->boolean('paid');
             $table->unsignedInteger('id_customer');
-            $table->unsignedInteger('id_shopping_cart');
+            $table->string('address');
+            $table->boolean('finished');
             $table->foreign('id_customer')->references('id_customer')->on('customers');
-            $table->foreign('id_shopping_cart')->references('id_shopping_cart')->on('shopping_cart');
         });
     }
 
